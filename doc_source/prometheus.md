@@ -60,7 +60,22 @@ After you configure Helm for your Amazon EKS cluster, you can use it to deploy P
        --namespace prometheus \
        --set alertmanager.persistentVolume.storageClass="gp2",server.persistentVolume.storageClass="gp2"
    ```
-
+   
+   Note
+   In Helm 3, by default stable repository is not set and above command may fail with following error : 
+   
+   ```
+   Error: failed to download "stable/prometheus" (hint: running `helm repo update` may help)
+   ```
+   
+   If you just have installed Helm, You may have to manually add it.
+   
+   ```
+   helm repo add stable https://kubernetes-charts.storage.googleapis.com
+   
+   helm repo update
+   ```
+   
 1. Verify that all of the pods in the `prometheus` namespace are in the `READY` state\.
 
    ```
